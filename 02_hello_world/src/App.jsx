@@ -12,6 +12,10 @@ function App() {
   })
 
   const isLoggedin = false
+
+  const btnClick = (label) => {
+    console.log(`${label} Button clicked!`)
+  }
  
   return(
     <>
@@ -24,6 +28,9 @@ function App() {
       ))}
 
       <ChildComponent />
+
+      <button onClick={() => btnClick("Increment")}>Increment</button>
+      <button onClick={() => btnClick("Decrement")}>Decrement</button>
     </>
   )
 }
