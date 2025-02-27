@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { memo, useState } from "react"
 
-const AddTodo = ({addTodo}) => {
+const AddTodo = memo(({addTask}) => {
+    console.log("AddTodo Redering")
 
     const [text, setText ] = useState("")
 
     const handleAdd = () => {
-        addTodo(text)
-        setText("")
+        addTask(text)
+        setText("") //reset empty value in input
     }
 
     return(
@@ -18,6 +19,6 @@ const AddTodo = ({addTodo}) => {
             <button onClick={handleAdd}>Add</button>
         </div>
     )
-}
+})
 
 export default AddTodo

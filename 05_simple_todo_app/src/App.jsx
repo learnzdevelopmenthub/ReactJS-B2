@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import TodoList from './TodoList'
 import AddTodo from './AddTodo'
 
@@ -9,21 +9,40 @@ function App() {
     {id: 2, text: "Read Documentation"}
   ])
 
-  const addTodo = (text) => {
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const addTask = useCallback((text) => {
+    console.log("addTask function Redering")
+
     const obj = { id: Date.now(), text: text }
 
     setTodos((prevTodos) => [...prevTodos, obj])
-  }
+  }, [])
 
-  const deleteTodo = (id) => {
+  const deleteTodo = useCallback((id) => {
+    console.log("addTask function Redering")
+
     setTodos((prevTodos) => prevTodos.filter( item => item.id != id ))
-  }
+  }, [])
+
+  const filteredTodos = useMemo(() => {
+    return todos.filter( item => item.text.toLowerCase().includes(searchTerm.toLowerCase()))
+  }, [todos, searchTerm]) 
+  
 
   return (
     <>
       <h1>To-Do App</h1>
-      <AddTodo addTodo={addTodo} />
-      <TodoList todos={todos} deleteTodo={deleteTodo}/>
+      <AddTodo addTask={addTask} />
+      <br />
+      <input 
+        type="text"
+        placeholder='Search tasks...'
+        onChange={(e) => setSearchTerm(e.target.value)}
+        value={searchTerm}
+      />
+      <br />
+      <TodoList todos={filteredTodos} deleteTodo={deleteTodo}/>
     </>
   )
 }

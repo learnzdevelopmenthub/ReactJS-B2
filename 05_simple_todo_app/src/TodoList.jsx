@@ -1,5 +1,8 @@
-const TodoList = ({todos, deleteTodo}) => {
+import { memo } from "react"
 
+const TodoList = memo(({todos, deleteTodo}) => {
+
+    console.log("TodoList Redering")
     
     return(
         <ul>
@@ -11,6 +14,6 @@ const TodoList = ({todos, deleteTodo}) => {
             ))}
         </ul>
     )
-}
+})
 
 export default TodoList
