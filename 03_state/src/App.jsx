@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import UserProfile from "./UserProfile"
 import Todo from "./Todo"
 
@@ -15,6 +15,10 @@ function App() {
   const decrement = () => {
     setCount(count - 1)
   }
+
+  useEffect(() => {
+    console.log("use effect is working...")
+  }, [])
 
   return (
     <>
