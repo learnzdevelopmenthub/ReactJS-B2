@@ -21,5 +21,18 @@ export const postsAPI = {
         }
 
         return response.json()
+    },
+    createPost: async (postData) => {
+        const response = await fetch(`${apiUrl}/users/${userID}/posts`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(postData)
+        })
+
+        if (!response.ok) {
+            throw new Error("Something went wrong");
+        }
+
+        return response.json()
     }
 }
